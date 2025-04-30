@@ -1,0 +1,41 @@
+
+
+export KMER=6
+export MODEL_PATH= 'Pretrained model path'
+export DATA_PATH= 'Data path'
+export OUTPUT_PATH= 'trained model path'
+
+
+ python run_finetune.py \
+    --model_type dna \
+    --tokenizer_name=dna$KMER \
+    --model_name_or_path $MODEL_PATH \
+    --task_name dnaprom \
+    --do_train \
+    --do_eval \
+    --data_dir $DATA_PATH \
+    --max_seq_length 100 \
+    --per_gpu_eval_batch_size=16   \
+    --per_gpu_train_batch_size=8   \
+    --learning_rate 3e-5 \
+    --num_train_epochs 6.0 \
+    --output_dir $OUTPUT_PATH \
+    --logging_steps 100 \
+    --save_steps 200 \
+    --warmup_percent 0.1 \
+    --hidden_dropout_prob 0.1 \
+    --overwrite_output_dir \
+    --weight_decay 0.01 \
+    --n_process 8
+
+(**********************************prediction****************************s)
+
+
+export KMER=6
+export model_path= trained model path
+export PREDICTION_PATH= output prediction path
+
+python predict.py \
+    --model_name_or_path $model_path \
+    --file_path 'file path of test.tsv file'
+
