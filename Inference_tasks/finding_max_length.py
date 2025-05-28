@@ -19,6 +19,6 @@ def get_max_nucleotide_length(file_path):
     return max_length
 
 # Example usage:
-file_path = "C:/Users/shiva/Documents/project_essentials/scripts/project_extra/merged_sequences.csv"  # Replace with your file path
+file_path = ""  # Replace with your file path
 max_length = get_max_nucleotide_length(file_path)
 print(f"The maximum length of nucleotide sequences in the file is: {max_length}")
