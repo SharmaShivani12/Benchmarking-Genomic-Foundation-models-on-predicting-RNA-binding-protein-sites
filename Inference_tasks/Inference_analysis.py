@@ -66,16 +66,16 @@ def load_rnaernie_data(pred6):
     return pred6_values, true_labels
 
 def main():
-    base_path = 'C:/Users/shiva/Documents/project_essentials/Datasets/KHSRP/early_stop_stats'
+    base_path = ''
 
-    pred1 = pd.read_csv('C:/Users/shiva/Documents/project_essentials/ALL_models/DNB-1/early_stop/predictions_earlystop_KHSRP.csv')
-    pred2 = pd.read_csv('C:/Users/shiva/Documents/project_essentials/ALL_models/caduceus/early_stop/test_predictions_caduceus_earlystop_KHSRP.csv')
-    pred3 = pd.read_csv('C:/Users/shiva/Documents/project_essentials/ALL_models/Genemask/early_stop/predictions_early_stop_KHSRP.csv')
-    pred4 = pd.read_csv('C:/Users/shiva/Documents/project_essentials/ALL_models/DNB-2/early_stop/prediction/predictions_KHSRP.csv')
-    pred5 = pd.read_csv('C:/Users/shiva/Documents/project_essentials/ALL_models/RNA-FM/early_stop/test_predictions_earlystop_KHSRP.csv')
-    pred6 = pd.read_csv('C:/Users/shiva/Documents/project_essentials/ALL_models/RNAErnie/early_stop/test_results_RNAERNIE_with_earlystop_KHSRP.csv')
+    pred1 = pd.read_csv('')
+    pred2 =  pd.read_csv('')')
+    pred3 = pd.read_csv('')
+    pred4 = pd.read_csv('')
+    pred5 = pd.read_csv('')
+    pred6 = pd.read_csv('')
 
-    actuals = pd.read_csv('C:/Users/shiva/Documents/project_essentials/Datasets/KHSRP/test_sequences.csv')
+    actuals =  pd.read_csv('')
 
     # Load predictions and labels for RNAErnie from its own file
     preds6, rnaernie_labels = load_rnaernie_data(pred6)
