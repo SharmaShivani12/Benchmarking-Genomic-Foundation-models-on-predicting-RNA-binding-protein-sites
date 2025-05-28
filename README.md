@@ -1,5 +1,4 @@
-# Uni-Project
-Benchmarking Genomic Foundation models on predicting RNA-binding protein sites.
+# Benchmarking Genomic Foundation models on predicting RNA-binding protein sites.
  In this project, we have used six pre-trained models and fine-tuned them to classify RNA binding protein site prediction.
 The fine-tuned scripts of all the models are in the repository. You must download the pre-trained model from the links below, and then you can use the script for your tasks.
 Before downloading, please create the environment using the .txt or .yml files from the model's respective GitHub repository to install all the packages. (For GitHub repo, check the credit section.)
