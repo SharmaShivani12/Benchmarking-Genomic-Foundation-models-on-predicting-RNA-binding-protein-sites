@@ -21,7 +21,7 @@ We used the same script mentioned in the GitHub repository, but created our func
 5.	Change the Datapath and model path per your directory in the finetune script.
 6.	You can use or tweak our parameters according to your requirements.
 7.	Perform Inference on the predicted output of the models. (Using inference script).
-## Credits
+## Credits :
 - Thanks to Yanrong Ji et al. (https://github.com/jerryji1993/DNABERT) for their work (https://www.biorxiv.org/content/10.1101/2020.09.17.301879v1).
 - Thanks to Zhihan Zhou et al. (https://github.com/MAGICS-LAB/DNABERT_2) for their work (https://arxiv.org/abs/2306.15006).
 - Thanks to Soumyadeep Roy et al. (https://github.com/clinical-trial/GeneMask/tree/main) for their work (https://arxiv.org/abs/2307.15933).
