@@ -20,12 +20,13 @@ from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_sc
 
 # ========== Helper Functions
 def set_seed(seed: int):
-    """Set all seeds to make results replicable."""
     torch.manual_seed(seed)
     torch.cuda.manual_seed_all(seed)
     np.random.seed(seed)
     random.seed(seed)
     torch.backends.cudnn.deterministic = True
+    torch.backends.cudnn.benchmark = False  # ⚠️ VERY IMPORTANT
+
 
 # ========== Argument Parsing
 parser = argparse.ArgumentParser(description='Fine-tuning Ernie for RNA sequence classification.')
@@ -48,7 +49,11 @@ parser.add_argument('--batch_size', type=int, default=8, help='Batch size for tr
 parser.add_argument('--num_train_epochs', type=int, default=3, help='Number of training epochs')
 parser.add_argument('--learning_rate', type=float, default=3e-5, help='Learning rate')
 #parser.add_argument('--dataset_name', type=str, default='default_task', help='Name of the data for naming output files')
+parser.add_argument('--seed', type=int, default=42, help='Random seed for reproducibility')
+...
 args = parser.parse_args()
+set_seed(args.seed)
+
 
 num_train_epochs=args.num_train_epochs
 # ========== Load Dataset
@@ -63,7 +68,7 @@ dataset = load_dataset('csv', data_files={
 tokenizer = RnaTokenizer.from_pretrained(args.model_name_or_path)
 
 def tokenize_function(examples):
-    print("Original Data:", examples['sequence'])  # Debug print
+    #print("Original Data:", examples['sequence'])  # Debug print
     tokenized_inputs = tokenizer(examples['sequence'], padding="max_length", truncation=True, max_length=128)
     
     # Assume 'sequence' is not to be tensorized, just carry it along
@@ -185,13 +190,56 @@ def train_or_evaluate(model, loader, optimizer, criterion, device, train=True, c
         return avg_loss, final_accuracy, final_precision, final_recall, final_f1
 
 
-# Training process
+
+
+# ========== Early Stopping Setup
+early_stopping_patience = 3
+best_val_f1 = 0.0
+patience_counter = 0
+best_val_loss = float('inf')
+
+best_model_path = os.path.join(args.output_dir, 'best_model.pt')
+
+# ========== Training Process with Early Stopping
+for epoch in range(num_train_epochs):
+    train_loss, train_acc, train_prec, train_rec, train_f1 = train_or_evaluate(
+        model, train_loader, optimizer, criterion, device, train=True)
+    scheduler.step()
+
+    print(f"Epoch {epoch+1} - Training: Loss {train_loss:.4f}, Acc {train_acc:.4f}, "
+          f"Precision {train_prec:.4f}, Recall {train_rec:.4f}, F1 {train_f1:.4f}")
+
+    val_loss, val_acc, val_prec, val_rec, val_f1 = train_or_evaluate(
+        model, validation_loader, optimizer, criterion, device, train=False)
+
+    print(f"Epoch {epoch+1} - Validation: Loss {val_loss:.4f}, Acc {val_acc:.4f}, "
+          f"Precision {val_prec:.4f}, Recall {val_rec:.4f}, F1 {val_f1:.4f}")
+
+    # Early stopping logic
+    if val_f1 > best_val_f1:
+      best_val_f1 = val_f1
+      patience_counter = 0
+      torch.save(model.state_dict(), best_model_path)
+      print(f"✅ New best model saved (F1: {val_f1:.4f}) to {best_model_path}")
+    else:
+      patience_counter += 1
+      print(f"⚠️ F1 did not improve. Patience: {patience_counter}/{early_stopping_patience}")
+      if patience_counter >= early_stopping_patience:
+        print("🛑 Early stopping triggered based on F1.")
+        break
+
+# ========== Load Best Model Before Testing
+if os.path.exists(best_model_path):
+    model.load_state_dict(torch.load(best_model_path))
+    print(f"✅ Loaded best model from {best_model_path} for testing.")
+
+'''
 for epoch in range(num_train_epochs):
     train_loss, train_acc, train_prec, train_rec, train_f1 = train_or_evaluate(
         model, train_loader, optimizer, criterion, device, train=True)
     scheduler.step()
     print(f"Epoch {epoch+1} - Training: Loss {train_loss:.4f}, Acc {train_acc:.4f}, Precision {train_prec:.4f}, Recall {train_rec:.4f}, F1 {train_f1:.4f}")
-
+'''
 
 
 val_loss, val_acc, val_prec, val_rec, val_f1 = train_or_evaluate(
@@ -228,7 +276,7 @@ test_results_df = pd.DataFrame({
 })
 
 # Save to CSV
-csv_path = os.path.join('test_results_RNAERNIE.csv')
+csv_path = os.path.join('test_results_RNAERNIE_with_earlystop_GTF2F1.csv')
 test_results_df.to_csv(csv_path, index=False)
 print(f"Saved test results to {csv_path}")
 
