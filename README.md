@@ -3,7 +3,7 @@
 The fine-tuned scripts of all the models are in the repository. You must download the pre-trained model from the links below, and then you can use the script for your tasks.
 Before downloading, please create the environment using the .txt or .yml files from the model's respective GitHub repository to install all the packages. (For GitHub repo, check the credit section.)
 We have hard-coded the command-line arguments inside the fine-tuning scripts for Caduceus and RNA-FM.
-Pre-trained model links are available. 
+## Pre-trained model links are available. 
 DNABERT-1: https://github.com/jerryji1993/DNABERT
 DNABERT-2: https://github.com/MAGICS-LAB/DNABERT_2
 GeneMask: https://github.com/roysoumya/GeneMask
@@ -11,7 +11,7 @@ Caduceus: https://huggingface.co/kuleshov-group/caduceus-ps_seqlen-1k_d_model-25
 RNA-FM: https://github.com/ml4bio/RNA-FM?tab=readme-ov-file#rna-fm
 RNAernie: https://huggingface.co/LLM-EDA/RNAErnie
 We used the same script mentioned in the GitHub repository, but created our function to get the prediction output in CSV format.
-Steps:
+## Steps:
 1.	Download the pretrained model files or use the Hugging Face model directly.
 2.	Create the environment and install all the necessary libraries.
 3.	Convert the Fasta files to CSV (Data_preparation folder)
