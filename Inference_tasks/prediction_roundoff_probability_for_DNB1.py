@@ -1,8 +1,8 @@
 import pandas as pd
 import ast
 # Load the data from the CSV file
-#data = pd.read_csv(r'C:\Users\shiva\Documents\project_essentials\DNB-1\pred_results_K_5.csv')  # Replace 'path_to_your_file.csv' with the actual file path
-data = pd.read_csv('C:/Users/shiva/Documents/project_essentials/DNB-2/predictions_lora_12.csv')
+
+data = pd.read_csv('')
 
 # Check the first few entries in the Probability column
 data['Probability'] = data['Probability'].apply(ast.literal_eval)
