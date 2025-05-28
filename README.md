@@ -1,8 +1,10 @@
 # Benchmarking Genomic Foundation models on predicting RNA-binding protein sites.
  In this project, we have used six pre-trained models and fine-tuned them to classify RNA binding protein site prediction.
 The fine-tuned scripts of all the models are in the repository. You must download the pre-trained model from the links below, and then you can use the script for your tasks.
-Before downloading, please create the environment using the .txt or .yml files from the model's respective GitHub repository to install all the packages. (For GitHub repo, check the credit section.)
-We have hard-coded the command-line arguments inside the fine-tuning scripts for Caduceus and RNA-FM. For the model DNABERT-1 , DNABERT-2 and GeneMask : We have used the finetuned script available in the Github repository of the authors .
+Before downloading, please create the environment using the .txt or .yml files from the model's respective GitHub repository to install all the packages. 
+For the models Caduceus and RNA-FM.We have hard-coded the command-line arguments inside the fine-tuning scripts .
+For the model DNABERT-1 , DNABERT-2 and GeneMask : We have used the finetuned script available in the Github repository of the authors .
+(For GitHub repo, check the credit section.)
 ## Pre-trained model links are available at below links:
 DNABERT-1: https://github.com/jerryji1993/DNABERT
 DNABERT-2: https://github.com/MAGICS-LAB/DNABERT_2
