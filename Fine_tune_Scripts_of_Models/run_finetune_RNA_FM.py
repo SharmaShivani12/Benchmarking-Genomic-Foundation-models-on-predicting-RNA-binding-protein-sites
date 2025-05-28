@@ -37,9 +37,9 @@ print(f'using {device} device')
 
 
 # Load your CSV files
-train_data = pd.read_csv("/vol/space/RNA-FM/Data/HNRNAPL/train_sequences.csv")  # Replace with your actual path
-val_data = pd.read_csv("/vol/space/RNA-FM//Data/HNRNAPL/validation_sequences.csv")      # Replace with your actual path
-test_data = pd.read_csv("/vol/space/RNA-FM//Data/HNRNAPL/test_sequences.csv") 
+train_data = pd.read_csv("train_sequences.csv")  # Replace with your actual path
+val_data = pd.read_csv("validation_sequences.csv")      # Replace with your actual path
+test_data = pd.read_csv("test_sequences.csv")    # Replace with your actual path
 # Check the structure of the data
 print(train_data.head())  # Check the structure of the train data
 print(val_data.head())
@@ -96,7 +96,7 @@ labels = train_data['label'].values  # Assuming labels are stored in the 'label'
 num_class = len(np.unique(labels))
 
 # Load RNA-FM model
-fm_model, alphabet = fm.pretrained.rna_fm_t12(Path('/vol/space/RNA-FM/RNA-FM_pretrained.pth'))  # Replace path if necessary
+fm_model, alphabet = fm.pretrained.rna_fm_t12(Path('/RNA-FM_pretrained.pth')  # Replace path if necessary
 batch_converter = alphabet.get_batch_converter(
 )
 
@@ -269,7 +269,7 @@ for epoch in range(epochs):
 
     train_acc = correct / total
     
-    ### 🔹 Compute Training Accuracy Using Collected Predictions
+    ###  Compute Training Accuracy Using Collected Predictions
     train_preds = []
     train_targets = []
 
@@ -329,17 +329,17 @@ for epoch in range(epochs):
       best_val_f1 = f1_score(val_targets.cpu(), val_preds.cpu())
       patience_counter = 0
       torch.save(model.state_dict(), best_model_path)
-      print(f"✅ Saved best model with F1: {best_val_f1:.4f}")
+      print(f" Saved best model with F1: {best_val_f1:.4f}")
     else:
       patience_counter += 1
-      print(f"⚠️ F1 did not improve. Patience: {patience_counter}/{early_stopping_patience}")
+      print(f" F1 did not improve. Patience: {patience_counter}/{early_stopping_patience}")
       if patience_counter >= early_stopping_patience:
-        print("🛑 Early stopping triggered based on F1 score.")
+        print(" Early stopping triggered based on F1 score.")
         break
 
 if os.path.exists(best_model_path):
     model.load_state_dict(torch.load(best_model_path))
-    print(f"✅ Loaded best model from {best_model_path} for testing.")
+    print(f"Loaded best model from {best_model_path} for testing.")
            
 train_loss_history.append(total_loss / len(train_loader))  # Correct way to log train loss
 val_loss_history.append(np.mean(val_losses))  # Keep this as is
@@ -366,7 +366,7 @@ for batch in test_loader:
 test_preds = np.concatenate(test_preds)
 test_labels = np.concatenate(test_labels)  # This replaces undefined y_test
 
-# ✅ Compute Evaluation Metrics
+# Compute Evaluation Metrics
 correct = np.sum(test_preds == test_labels)
 total = len(test_labels)
 precision = precision_score(test_labels, test_preds)
