@@ -69,7 +69,7 @@ def main():
     base_path = ''
 
     pred1 = pd.read_csv('')
-    pred2 =  pd.read_csv('')')
+    pred2 =  pd.read_csv('')
     pred3 = pd.read_csv('')
     pred4 = pd.read_csv('')
     pred5 = pd.read_csv('')
