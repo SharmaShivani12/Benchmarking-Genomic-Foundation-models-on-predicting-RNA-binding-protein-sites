@@ -16,7 +16,7 @@ python train.py \
     --per_device_eval_batch_size 16 \
     --gradient_accumulation_steps 1 \
     --learning_rate ${LR} \
-    --num_train_epochs 6\
+    --num_train_epochs 60 \        #Set as per your requirement
     --fp16 \
     --save_steps 200 \
     --output_dir output/dnabert2 \
@@ -26,5 +26,7 @@ python train.py \
     --logging_steps 100 \
     --overwrite_output_dir True \
     --log_level info \
-    --find_unused_parameters False
+    --find_unused_parameters False \
+    --early_stop 3 \
+    --seed 42
   
