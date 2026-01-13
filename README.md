@@ -19,7 +19,7 @@ We used the same script mentioned in the GitHub repository, but created our func
 3.	Convert the Fasta files to CSV (Data_preparation folder)
 4.	You must convert the dataset into k-mers and save the train, validation and test files in “.tsv” format. (This is only for DNABERT-1 and GENEMASK) (Data_preparation folder).
 5.	Change the Datapath and model path per your directory in the finetune script.
-6.	You can use or tweak our parameters according to your requirements.
+6.	You can use or tweak our parameters according to your requirements. 
 7.	Perform Inference on the predicted output of the models. (Using inference script).
 ## Credits :
 - Thanks to Yanrong Ji et al. (https://github.com/jerryji1993/DNABERT) for their work (https://www.biorxiv.org/content/10.1101/2020.09.17.301879v1).
