@@ -5,7 +5,7 @@ Before downloading, please create the environment using the .txt or .yml files f
 - For the models Caduceus and RNA-FM : We have hard-coded the command-line arguments inside the fine-tuning scripts .
 - For the model DNABERT-1 , DNABERT-2 and GeneMask : We have used the finetuned script available in the Github repository of the authors .
 - csv_export for further csv files (eclip data from the paper https://link.springer.com/article/10.1186/s13059-025-03674-8
-(For GitHub repo, check the credit section.)
+- (For GitHub repo, check the credit section.)
 ## Pre-trained model links are available at below links:
 DNABERT-1: https://github.com/jerryji1993/DNABERT
 DNABERT-2: https://github.com/MAGICS-LAB/DNABERT_2
